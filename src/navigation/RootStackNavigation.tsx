@@ -11,7 +11,7 @@ const Stack = createNativeStackNavigator<RootStackParamList>();
 
 function RootStack() {
   const {token} = useAuthStore();
-  console.log({token});
+
   return (
     <NavigationContainer>
       <Stack.Navigator

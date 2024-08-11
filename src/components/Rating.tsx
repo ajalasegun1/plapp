@@ -11,7 +11,7 @@ type Props = {
 };
 const Rating: FC<Props> = ({rating, gap, size}) => {
   const styles = makeStyles(gap!!);
-  console.log({check: getTenth(rating!)});
+
   function determine() {
     if (getTenth(rating!) >= 4.5) {
       return (
