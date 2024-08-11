@@ -12,7 +12,7 @@ import EyeIcon from '../../assets/images/icons/eye.svg';
 import CustomButton from '../../components/CustomButton';
 import {SignupScreenProps} from '../../navigation/types';
 import {validateSignupForm} from '../../utils/validateForms';
-import useAuthStore from '../../store/useAuthStore';
+import useAuthStore from '../../store/auth/useAuthStore';
 import Toast from 'react-native-simple-toast';
 
 const Signup: FC<SignupScreenProps> = ({navigation}) => {
@@ -33,9 +33,8 @@ const Signup: FC<SignupScreenProps> = ({navigation}) => {
       return;
     }
     if (isValid) {
-      console.log('valid!');
       saveUser({
-        user: {name, email, password},
+        user: {name, email: email.toLowerCase(), password},
         token:
           'laksnclkansclkalskcnboajbsckjbascjbisqdbvcihqdscibqdaichqiwdhvcsihqwvficqbcjbwqiejbcihwevciywvcdk;jbasicjbiwdjajbscoasocbaosbcoasciaoiscboiabcioansciobascoibas',
       });

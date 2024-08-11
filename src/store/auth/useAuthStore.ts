@@ -2,7 +2,7 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import {create} from 'zustand';
 import {persist, createJSONStorage} from 'zustand/middleware';
 
-type User = {
+export type User = {
   name: string;
   email: string;
   password: string;
@@ -19,6 +19,7 @@ type AuthStore = {
   user?: User;
   saveUser: ({user, token}: SaveUserProp) => void;
   login: ({user, token}: SaveUserProp) => void;
+  logout: () => void;
 };
 
 const useAuthStore = create<AuthStore>()(

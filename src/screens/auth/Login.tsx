@@ -1,20 +1,32 @@
-import {Image, ScrollView, StyleSheet, Text, View} from 'react-native';
+import {ScrollView, StyleSheet, Text, View} from 'react-native';
 import React, {FC, useState} from 'react';
 import MyStatusBar from '../../components/MyStatusBar';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {vs, s, ms} from 'react-native-size-matters';
 import Spacer from '../../components/Spacer';
 import CustomInput from '../../components/CustomInput';
-import Profile from '../../assets/images/icons/profile.svg';
 import Mail from '../../assets/images/icons/mail.svg';
 import Lock from '../../assets/images/icons/lock.svg';
 import EyeIcon from '../../assets/images/icons/eye.svg';
 import CustomButton from '../../components/CustomButton';
 import {LoginScreenProps} from '../../navigation/types';
+import useAuthStore, {User} from '../../store/auth/useAuthStore';
+import {validateLoginForm} from '../../utils/validateForms';
 
 const Login: FC<LoginScreenProps> = ({navigation}) => {
+  const {users, login} = useAuthStore();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  function handleLogin() {
+    const isValid = validateLoginForm({users, cred: {email, password}});
+
+    if (isValid) {
+      const found = users.find(user => user.email === email);
+      if (found) {
+        login({user: found, token: 'aslkckasckansclknlkXZNlkNSX'}); //random hardcoded token
+      }
+    }
+  }
   return (
     <SafeAreaView style={styles.container}>
       <MyStatusBar content="dark-content" />
@@ -39,7 +51,7 @@ const Login: FC<LoginScreenProps> = ({navigation}) => {
           />
         </View>
         <Spacer gap={20} />
-        <CustomButton text="Sign in" onPress={() => {}} />
+        <CustomButton text="Sign in" onPress={handleLogin} />
         <Spacer gap={10} />
 
         <Text style={styles.smallText}>
